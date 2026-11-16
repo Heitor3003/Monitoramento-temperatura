@@ -23,7 +23,7 @@ const grafico = new Chart(
 function atualizarTemperatura() {
   
 
-  fetch("/temperatura").
+  fetch("/dados").
   then(resposta => resposta.json()).
   then(dados => {
 

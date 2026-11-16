@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template
-import random
+from serial import ler_dados
+
 
 app = Flask(__name__)
 
@@ -7,13 +8,15 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
-@app.route("/temperatura")
-def temperatura():
+@app.route("/dados")
+def dados():
     
-    valor = round(random.uniform(20,35), 2)
+    temp, umid = ler_dados()
 
     return jsonify({
-        "temperatura":valor
+        "temperatura":temp,
+        "umidade": umid
     })
 
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True, use_reloader=False)
